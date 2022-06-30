@@ -28,6 +28,76 @@
           <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="AllLoginLogs">
+        <s:complexType />
+      </s:element>
+      <s:element name="AllLoginLogsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AllLoginLogsResult" type="tns:ArrayOfLoginLog" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLoginLog">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LoginLog" nillable="true" type="tns:LoginLog" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LoginLog">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Time" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AllLogoutLogs">
+        <s:complexType />
+      </s:element>
+      <s:element name="AllLogoutLogsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AllLogoutLogsResult" type="tns:ArrayOfLogoutLog" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLogoutLog">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LogoutLog" nillable="true" type="tns:LogoutLog" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LogoutLog">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Time" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AllChatting">
+        <s:complexType />
+      </s:element>
+      <s:element name="AllChattingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AllChattingResult" type="tns:ArrayOfChatting" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfChatting">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Chatting" nillable="true" type="tns:Chatting" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Chatting">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderUsername" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecieverUsername" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DateSent" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChattingType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Encrypted" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="AddToLogoutLogs">
         <s:complexType>
           <s:sequence>
@@ -69,10 +139,10 @@
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="from" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="to" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="date" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="date" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="msg" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="encrypted" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="encrypted" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -86,6 +156,24 @@
   </wsdl:message>
   <wsdl:message name="AllEmployeesSoapOut">
     <wsdl:part name="parameters" element="tns:AllEmployeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="AllLoginLogsSoapIn">
+    <wsdl:part name="parameters" element="tns:AllLoginLogs" />
+  </wsdl:message>
+  <wsdl:message name="AllLoginLogsSoapOut">
+    <wsdl:part name="parameters" element="tns:AllLoginLogsResponse" />
+  </wsdl:message>
+  <wsdl:message name="AllLogoutLogsSoapIn">
+    <wsdl:part name="parameters" element="tns:AllLogoutLogs" />
+  </wsdl:message>
+  <wsdl:message name="AllLogoutLogsSoapOut">
+    <wsdl:part name="parameters" element="tns:AllLogoutLogsResponse" />
+  </wsdl:message>
+  <wsdl:message name="AllChattingSoapIn">
+    <wsdl:part name="parameters" element="tns:AllChatting" />
+  </wsdl:message>
+  <wsdl:message name="AllChattingSoapOut">
+    <wsdl:part name="parameters" element="tns:AllChattingResponse" />
   </wsdl:message>
   <wsdl:message name="AddToLogoutLogsSoapIn">
     <wsdl:part name="parameters" element="tns:AddToLogoutLogs" />
@@ -116,6 +204,18 @@
       <wsdl:input message="tns:AllEmployeesSoapIn" />
       <wsdl:output message="tns:AllEmployeesSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="AllLoginLogs">
+      <wsdl:input message="tns:AllLoginLogsSoapIn" />
+      <wsdl:output message="tns:AllLoginLogsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AllLogoutLogs">
+      <wsdl:input message="tns:AllLogoutLogsSoapIn" />
+      <wsdl:output message="tns:AllLogoutLogsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AllChatting">
+      <wsdl:input message="tns:AllChattingSoapIn" />
+      <wsdl:output message="tns:AllChattingSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="AddToLogoutLogs">
       <wsdl:input message="tns:AddToLogoutLogsSoapIn" />
       <wsdl:output message="tns:AddToLogoutLogsSoapOut" />
@@ -137,6 +237,33 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="AllEmployees">
       <soap:operation soapAction="http://tempuri.org/AllEmployees" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AllLoginLogs">
+      <soap:operation soapAction="http://tempuri.org/AllLoginLogs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AllLogoutLogs">
+      <soap:operation soapAction="http://tempuri.org/AllLogoutLogs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AllChatting">
+      <soap:operation soapAction="http://tempuri.org/AllChatting" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -185,6 +312,33 @@
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="AllEmployees">
       <soap12:operation soapAction="http://tempuri.org/AllEmployees" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AllLoginLogs">
+      <soap12:operation soapAction="http://tempuri.org/AllLoginLogs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AllLogoutLogs">
+      <soap12:operation soapAction="http://tempuri.org/AllLogoutLogs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AllChatting">
+      <soap12:operation soapAction="http://tempuri.org/AllChatting" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

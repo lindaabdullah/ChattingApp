@@ -54,11 +54,8 @@ namespace TestGUI.Forms
             {
                 BeginInvoke(new Action(() =>
                 {
-
-               
-                    // TODO: add decryption
-
-                    Console.WriteLine(response2.Messages);
+                    
+                    
                     foreach (dynamic msg in response2.Messages)
                     {
                         if((bool)msg.Encrypted)
@@ -75,17 +72,13 @@ namespace TestGUI.Forms
             {
                 BeginInvoke(new Action(() =>
                 {
-                    //listBox2.Controls.Clear();
                     string msg = response.Message.ToString();
                     if ((bool) response.Encrypt)
                     {
                         msg = NetworkHandler.Decrypt(msg);
                     }
                     listBox2.Controls.Add(new ChatBox(response.Username.ToString(), response.SentAt.ToString(), msg));
-                    /*
-                    foreach (dynamic msg in response.Message)
-                    {
-                    }*/
+                    
                 }));
             });
 

@@ -19,7 +19,9 @@ namespace WebApplication1.Models
         [StringLength(100)]
         public string RecieverUsername { get; set; }
 
-        public DateTime DateSent { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string DateSent { get; set; }
 
         [Required]
         [StringLength(100)]

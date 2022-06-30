@@ -31,6 +31,20 @@ namespace SuperUser.localhost1 {
         
         private System.Threading.SendOrPostCallback AllEmployeesOperationCompleted;
         
+        private System.Threading.SendOrPostCallback AllLoginLogsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AllLogoutLogsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AllChattingOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AddToLogoutLogsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AddToLogInOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AddEmployeeOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AddToChattingOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -73,6 +87,27 @@ namespace SuperUser.localhost1 {
         public event AllEmployeesCompletedEventHandler AllEmployeesCompleted;
         
         /// <remarks/>
+        public event AllLoginLogsCompletedEventHandler AllLoginLogsCompleted;
+        
+        /// <remarks/>
+        public event AllLogoutLogsCompletedEventHandler AllLogoutLogsCompleted;
+        
+        /// <remarks/>
+        public event AllChattingCompletedEventHandler AllChattingCompleted;
+        
+        /// <remarks/>
+        public event AddToLogoutLogsCompletedEventHandler AddToLogoutLogsCompleted;
+        
+        /// <remarks/>
+        public event AddToLogInCompletedEventHandler AddToLogInCompleted;
+        
+        /// <remarks/>
+        public event AddEmployeeCompletedEventHandler AddEmployeeCompleted;
+        
+        /// <remarks/>
+        public event AddToChattingCompletedEventHandler AddToChattingCompleted;
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AllEmployees", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public Employee[] AllEmployees() {
             object[] results = this.Invoke("AllEmployees", new object[0]);
@@ -96,6 +131,221 @@ namespace SuperUser.localhost1 {
             if ((this.AllEmployeesCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.AllEmployeesCompleted(this, new AllEmployeesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AllLoginLogs", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public LoginLog[] AllLoginLogs() {
+            object[] results = this.Invoke("AllLoginLogs", new object[0]);
+            return ((LoginLog[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AllLoginLogsAsync() {
+            this.AllLoginLogsAsync(null);
+        }
+        
+        /// <remarks/>
+        public void AllLoginLogsAsync(object userState) {
+            if ((this.AllLoginLogsOperationCompleted == null)) {
+                this.AllLoginLogsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAllLoginLogsOperationCompleted);
+            }
+            this.InvokeAsync("AllLoginLogs", new object[0], this.AllLoginLogsOperationCompleted, userState);
+        }
+        
+        private void OnAllLoginLogsOperationCompleted(object arg) {
+            if ((this.AllLoginLogsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AllLoginLogsCompleted(this, new AllLoginLogsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AllLogoutLogs", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public LogoutLog[] AllLogoutLogs() {
+            object[] results = this.Invoke("AllLogoutLogs", new object[0]);
+            return ((LogoutLog[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AllLogoutLogsAsync() {
+            this.AllLogoutLogsAsync(null);
+        }
+        
+        /// <remarks/>
+        public void AllLogoutLogsAsync(object userState) {
+            if ((this.AllLogoutLogsOperationCompleted == null)) {
+                this.AllLogoutLogsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAllLogoutLogsOperationCompleted);
+            }
+            this.InvokeAsync("AllLogoutLogs", new object[0], this.AllLogoutLogsOperationCompleted, userState);
+        }
+        
+        private void OnAllLogoutLogsOperationCompleted(object arg) {
+            if ((this.AllLogoutLogsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AllLogoutLogsCompleted(this, new AllLogoutLogsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AllChatting", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Chatting[] AllChatting() {
+            object[] results = this.Invoke("AllChatting", new object[0]);
+            return ((Chatting[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AllChattingAsync() {
+            this.AllChattingAsync(null);
+        }
+        
+        /// <remarks/>
+        public void AllChattingAsync(object userState) {
+            if ((this.AllChattingOperationCompleted == null)) {
+                this.AllChattingOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAllChattingOperationCompleted);
+            }
+            this.InvokeAsync("AllChatting", new object[0], this.AllChattingOperationCompleted, userState);
+        }
+        
+        private void OnAllChattingOperationCompleted(object arg) {
+            if ((this.AllChattingCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AllChattingCompleted(this, new AllChattingCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AddToLogoutLogs", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void AddToLogoutLogs(string username) {
+            this.Invoke("AddToLogoutLogs", new object[] {
+                        username});
+        }
+        
+        /// <remarks/>
+        public void AddToLogoutLogsAsync(string username) {
+            this.AddToLogoutLogsAsync(username, null);
+        }
+        
+        /// <remarks/>
+        public void AddToLogoutLogsAsync(string username, object userState) {
+            if ((this.AddToLogoutLogsOperationCompleted == null)) {
+                this.AddToLogoutLogsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddToLogoutLogsOperationCompleted);
+            }
+            this.InvokeAsync("AddToLogoutLogs", new object[] {
+                        username}, this.AddToLogoutLogsOperationCompleted, userState);
+        }
+        
+        private void OnAddToLogoutLogsOperationCompleted(object arg) {
+            if ((this.AddToLogoutLogsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AddToLogoutLogsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AddToLogIn", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void AddToLogIn(string username) {
+            this.Invoke("AddToLogIn", new object[] {
+                        username});
+        }
+        
+        /// <remarks/>
+        public void AddToLogInAsync(string username) {
+            this.AddToLogInAsync(username, null);
+        }
+        
+        /// <remarks/>
+        public void AddToLogInAsync(string username, object userState) {
+            if ((this.AddToLogInOperationCompleted == null)) {
+                this.AddToLogInOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddToLogInOperationCompleted);
+            }
+            this.InvokeAsync("AddToLogIn", new object[] {
+                        username}, this.AddToLogInOperationCompleted, userState);
+        }
+        
+        private void OnAddToLogInOperationCompleted(object arg) {
+            if ((this.AddToLogInCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AddToLogInCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AddEmployee", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void AddEmployee(int ssn, string name, string surname, string username, string password, string email, string address) {
+            this.Invoke("AddEmployee", new object[] {
+                        ssn,
+                        name,
+                        surname,
+                        username,
+                        password,
+                        email,
+                        address});
+        }
+        
+        /// <remarks/>
+        public void AddEmployeeAsync(int ssn, string name, string surname, string username, string password, string email, string address) {
+            this.AddEmployeeAsync(ssn, name, surname, username, password, email, address, null);
+        }
+        
+        /// <remarks/>
+        public void AddEmployeeAsync(int ssn, string name, string surname, string username, string password, string email, string address, object userState) {
+            if ((this.AddEmployeeOperationCompleted == null)) {
+                this.AddEmployeeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddEmployeeOperationCompleted);
+            }
+            this.InvokeAsync("AddEmployee", new object[] {
+                        ssn,
+                        name,
+                        surname,
+                        username,
+                        password,
+                        email,
+                        address}, this.AddEmployeeOperationCompleted, userState);
+        }
+        
+        private void OnAddEmployeeOperationCompleted(object arg) {
+            if ((this.AddEmployeeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AddEmployeeCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AddToChatting", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void AddToChatting(string from, string to, string date, string msg, string type, string encrypted) {
+            this.Invoke("AddToChatting", new object[] {
+                        from,
+                        to,
+                        date,
+                        msg,
+                        type,
+                        encrypted});
+        }
+        
+        /// <remarks/>
+        public void AddToChattingAsync(string from, string to, string date, string msg, string type, string encrypted) {
+            this.AddToChattingAsync(from, to, date, msg, type, encrypted, null);
+        }
+        
+        /// <remarks/>
+        public void AddToChattingAsync(string from, string to, string date, string msg, string type, string encrypted, object userState) {
+            if ((this.AddToChattingOperationCompleted == null)) {
+                this.AddToChattingOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddToChattingOperationCompleted);
+            }
+            this.InvokeAsync("AddToChatting", new object[] {
+                        from,
+                        to,
+                        date,
+                        msg,
+                        type,
+                        encrypted}, this.AddToChattingOperationCompleted, userState);
+        }
+        
+        private void OnAddToChattingOperationCompleted(object arg) {
+            if ((this.AddToChattingCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AddToChattingCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -212,6 +462,189 @@ namespace SuperUser.localhost1 {
     }
     
     /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class Chatting {
+        
+        private int idField;
+        
+        private string senderUsernameField;
+        
+        private string recieverUsernameField;
+        
+        private string dateSentField;
+        
+        private string messageField;
+        
+        private string chattingTypeField;
+        
+        private string encryptedField;
+        
+        /// <remarks/>
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SenderUsername {
+            get {
+                return this.senderUsernameField;
+            }
+            set {
+                this.senderUsernameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RecieverUsername {
+            get {
+                return this.recieverUsernameField;
+            }
+            set {
+                this.recieverUsernameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DateSent {
+            get {
+                return this.dateSentField;
+            }
+            set {
+                this.dateSentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Message {
+            get {
+                return this.messageField;
+            }
+            set {
+                this.messageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ChattingType {
+            get {
+                return this.chattingTypeField;
+            }
+            set {
+                this.chattingTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Encrypted {
+            get {
+                return this.encryptedField;
+            }
+            set {
+                this.encryptedField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class LogoutLog {
+        
+        private int idField;
+        
+        private string usernameField;
+        
+        private System.DateTime timeField;
+        
+        /// <remarks/>
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Username {
+            get {
+                return this.usernameField;
+            }
+            set {
+                this.usernameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime Time {
+            get {
+                return this.timeField;
+            }
+            set {
+                this.timeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class LoginLog {
+        
+        private int idField;
+        
+        private string usernameField;
+        
+        private System.DateTime timeField;
+        
+        /// <remarks/>
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Username {
+            get {
+                return this.usernameField;
+            }
+            set {
+                this.usernameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime Time {
+            get {
+                return this.timeField;
+            }
+            set {
+                this.timeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void AllEmployeesCompletedEventHandler(object sender, AllEmployeesCompletedEventArgs e);
     
@@ -236,6 +669,100 @@ namespace SuperUser.localhost1 {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void AllLoginLogsCompletedEventHandler(object sender, AllLoginLogsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AllLoginLogsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AllLoginLogsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public LoginLog[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((LoginLog[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void AllLogoutLogsCompletedEventHandler(object sender, AllLogoutLogsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AllLogoutLogsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AllLogoutLogsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public LogoutLog[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((LogoutLog[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void AllChattingCompletedEventHandler(object sender, AllChattingCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AllChattingCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AllChattingCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Chatting[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Chatting[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void AddToLogoutLogsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void AddToLogInCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void AddEmployeeCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void AddToChattingCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

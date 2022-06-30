@@ -35,7 +35,9 @@ namespace TestServer
 						socket.Send(Active());
                 }
                 Console.WriteLine($"Active users count: {activeUsers.Count}");
+
 				ws.AddToLogIn(username);
+				
 				return new { Type = "signin_success", Username = username };
 			}
 			else
@@ -44,21 +46,7 @@ namespace TestServer
 
 		public static dynamic SignUp(dynamic data)
 		{
-			// TODO: duplicate email checks and stuff
 			ws.AddEmployee(int.Parse(data.SSN.ToString()), data.Name.ToString(), data.Surname.ToString(), data.Username.ToString(), data.Password.ToString(), data.Email.ToString(), data.Address.ToString());
-			
-			/*
-			db.Employees.Add(new Employee
-			{
-				SSN = int.Parse(data.SSN.ToString()),
-				Name = data.Name.ToString(),
-				Surname = data.Surname.ToString(),
-				Username = data.Username.ToString(),
-				Password = data.Password.ToString(),
-				Email = data.Email.ToString(),
-				Address = data.Address.ToString()
-			});
-			*/
 
 			return new { Type = "signup_success" };
 		}
@@ -99,26 +87,17 @@ namespace TestServer
 		{
 			string from = data.From.ToString();
 			string BroadastMsg = data.BroadCastMessage.ToString();
-			DateTime datesent = data.DateSentAt;
+			string datesent = data.DateSentAt.ToString();
 			string encrypted = data.Encrypt.ToString();
+
 
 			foreach (var activeSockets in activeUsers)
 			{
-				ws.AddToChatting(from, activeSockets.Value.Username.ToString(), datesent, BroadastMsg, encrypted, "Broadcast");
+				string reqUser = activeSockets.Value.Username.ToString();
+
+				ws.AddToChatting(from, reqUser, datesent, BroadastMsg, "Broadcast", encrypted);
 				 
-				/*
-				db.Chattings.Add(new Chatting  // add broad casted message to table in database
-				{ 
-					SenderUsername = from, 
-					RecieverUsername = activeSockets.Value.Username.ToString(), 
-					DateSent = datesent, 
-					Message = BroadastMsg, 
-					ChattingType = "Broadcast",
-					Encrypted = encrypted
-				});
 				
-				db.SaveChanges();
-				*/
 				activeSockets.Key.Send(new // send broadcasted message to active sockets
 				{ 
 					Type = "BroadCast", 
@@ -127,6 +106,7 @@ namespace TestServer
 					FromUser = from,
 					Encrypt = encrypted
 				});
+
 			}
 		}
 
@@ -144,41 +124,9 @@ namespace TestServer
 			};
 
 			to.Key.Send(response);
-        
-			ws.AddToChatting(data.From, data.To, DateTime.Now, data.Message.ToString(), data.Encrypt, "Private");
-            
-			/*
-			db.Chattings.Add(new Chatting
-			{
-				SenderUsername = data.From,
-				RecieverUsername = data.To,
-				DateSent = DateTime.Now,
-				Message = data.Message,
-				ChattingType = "Private",
-				Encrypted = data.Encrypt
-				// TODO: add Encrypt
-			});
+			var datenow = DateTime.Now.ToString();
 
-            try
-            {
-				db.SaveChanges();
-
-            }
-			catch (DbEntityValidationException e)
-			{
-				foreach (var eve in e.EntityValidationErrors)
-				{
-					Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-						eve.Entry.Entity.GetType().Name, eve.Entry.State);
-					foreach (var ve in eve.ValidationErrors)
-					{
-						Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-							ve.PropertyName, ve.ErrorMessage);
-					}
-				}
-				throw;
-			}
-		*/	
+			ws.AddToChatting(data.From.ToString(), data.To.ToString(), datenow, data.Message.ToString(), "Private", data.Encrypt.ToString());
 		}
 
 		public static void SocketLoop(NetworkHandlerSocket handler)
@@ -242,14 +190,15 @@ namespace TestServer
 
 				new Thread(() =>
 					{
+
 						Console.WriteLine("Client connected");
 						while (handler.Connected) SocketLoop(handler);
 						Console.WriteLine("Client disconnected");
 						
-						var employee = activeUsers[handler];
-						ws.AddToLogoutLogs(employee.Username);
+						ws.AddToLogoutLogs(activeUsers[handler].Username);
 						
 						activeUsers.Remove(handler);
+						
 						Console.WriteLine($"Active users count: {activeUsers.Count}");
 						foreach (var socket in activeUsers.Keys)
 						{

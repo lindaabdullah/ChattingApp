@@ -5,7 +5,6 @@ using System.Net.Sockets;
 using System.Web;
 using System.Web.Services;
 using WebApplication1.Models;
-using WebApplication1.Models;
 
 
 namespace WebApplication1
@@ -22,12 +21,36 @@ namespace WebApplication1
     {
         Model1 db = new Model1();
         
+        // methods to show tables
+        //------------------------------------------------
         [WebMethod]
         public List<Employee> AllEmployees()
         {
             return db.Employees.ToList();
         }
         
+        [WebMethod]
+        public List<LoginLog> AllLoginLogs()
+        {
+            return db.LoginLogs.ToList();
+        }
+
+        [WebMethod]
+        public List<LogoutLog> AllLogoutLogs()
+        {
+            return db.LogoutLogs.ToList();
+        }
+
+        [WebMethod]
+        public List<Chatting> AllChatting()
+        {
+            return db.Chattings.ToList();
+        }
+
+        //------------------------------------------------
+        // methods to add to a table
+        //------------------------------------------------
+
         [WebMethod]
         public void AddToLogoutLogs(string username)
         {
@@ -68,7 +91,7 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public void AddToChatting(string from, string to, DateTime date, string msg, string encrypted, string type)
+        public void AddToChatting(string from, string to, string date, string msg, string type, string encrypted)
         {
             db.Chattings.Add(new Chatting  // add broad casted message to table in database
             {
@@ -81,5 +104,7 @@ namespace WebApplication1
             });
             db.SaveChanges();
         }
+        //------------------------------------------------
     }
+
 }

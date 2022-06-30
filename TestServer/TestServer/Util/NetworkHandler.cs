@@ -76,7 +76,7 @@ namespace TestServer.Util
                     if (!Connected)
                         throw new SocketException();
                 }
-                byte[] buffer = new byte[1024];
+                byte[] buffer = new byte[10240];
                 int count = handler.Receive(buffer);
 
                 return ByteArrayToString(buffer.Take(count).ToArray());

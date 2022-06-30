@@ -64,7 +64,16 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Web References\localhost1\Chatting.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\localhost1\Employee.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\localhost1\LoginLog.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\localhost1\LogoutLog.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\localhost1\Reference.map">
