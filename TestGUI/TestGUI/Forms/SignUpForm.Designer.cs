@@ -29,21 +29,22 @@
         private void InitializeComponent()
         {
             this.UsernameBox = new System.Windows.Forms.GroupBox();
-            this.UsernameLabel = new System.Windows.Forms.Label();
-            this.NewUsername = new System.Windows.Forms.TextBox();
-            this.PasswordLabel = new System.Windows.Forms.Label();
-            this.NewPassword = new System.Windows.Forms.TextBox();
-            this.SSNLabel = new System.Windows.Forms.Label();
-            this.NewName = new System.Windows.Forms.TextBox();
-            this.NewSurname = new System.Windows.Forms.TextBox();
-            this.EmailLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.NewSSN = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.NewAddress = new System.Windows.Forms.TextBox();
             this.NewEmail = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.NewSSN = new System.Windows.Forms.TextBox();
+            this.EmailLabel = new System.Windows.Forms.Label();
+            this.UsernameLabel = new System.Windows.Forms.Label();
+            this.NewSurname = new System.Windows.Forms.TextBox();
+            this.NewUsername = new System.Windows.Forms.TextBox();
+            this.NewName = new System.Windows.Forms.TextBox();
+            this.NewPassword = new System.Windows.Forms.TextBox();
+            this.SSNLabel = new System.Windows.Forms.Label();
+            this.PasswordLabel = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.UsernameBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,69 +71,31 @@
             this.UsernameBox.TabIndex = 5;
             this.UsernameBox.TabStop = false;
             // 
-            // UsernameLabel
+            // label3
             // 
-            this.UsernameLabel.AutoSize = true;
-            this.UsernameLabel.Location = new System.Drawing.Point(15, 49);
-            this.UsernameLabel.Name = "UsernameLabel";
-            this.UsernameLabel.Size = new System.Drawing.Size(70, 16);
-            this.UsernameLabel.TabIndex = 2;
-            this.UsernameLabel.Text = "Username";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(15, 11);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 16);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "SSN";
             // 
-            // NewUsername
+            // NewSSN
             // 
-            this.NewUsername.Location = new System.Drawing.Point(105, 49);
-            this.NewUsername.Name = "NewUsername";
-            this.NewUsername.Size = new System.Drawing.Size(155, 22);
-            this.NewUsername.TabIndex = 0;
+            this.NewSSN.Location = new System.Drawing.Point(105, 11);
+            this.NewSSN.Name = "NewSSN";
+            this.NewSSN.Size = new System.Drawing.Size(155, 22);
+            this.NewSSN.TabIndex = 17;
             // 
-            // PasswordLabel
+            // button1
             // 
-            this.PasswordLabel.AutoSize = true;
-            this.PasswordLabel.Location = new System.Drawing.Point(18, 97);
-            this.PasswordLabel.Name = "PasswordLabel";
-            this.PasswordLabel.Size = new System.Drawing.Size(67, 16);
-            this.PasswordLabel.TabIndex = 6;
-            this.PasswordLabel.Text = "Password";
-            // 
-            // NewPassword
-            // 
-            this.NewPassword.Location = new System.Drawing.Point(105, 97);
-            this.NewPassword.Name = "NewPassword";
-            this.NewPassword.Size = new System.Drawing.Size(155, 22);
-            this.NewPassword.TabIndex = 7;
-            // 
-            // SSNLabel
-            // 
-            this.SSNLabel.AutoSize = true;
-            this.SSNLabel.Location = new System.Drawing.Point(33, 162);
-            this.SSNLabel.Name = "SSNLabel";
-            this.SSNLabel.Size = new System.Drawing.Size(44, 16);
-            this.SSNLabel.TabIndex = 8;
-            this.SSNLabel.Text = "Name";
-            // 
-            // NewName
-            // 
-            this.NewName.Location = new System.Drawing.Point(105, 159);
-            this.NewName.Name = "NewName";
-            this.NewName.Size = new System.Drawing.Size(155, 22);
-            this.NewName.TabIndex = 9;
-            // 
-            // NewSurname
-            // 
-            this.NewSurname.Location = new System.Drawing.Point(105, 217);
-            this.NewSurname.Name = "NewSurname";
-            this.NewSurname.Size = new System.Drawing.Size(155, 22);
-            this.NewSurname.TabIndex = 10;
-            // 
-            // EmailLabel
-            // 
-            this.EmailLabel.AutoSize = true;
-            this.EmailLabel.Location = new System.Drawing.Point(33, 220);
-            this.EmailLabel.Name = "EmailLabel";
-            this.EmailLabel.Size = new System.Drawing.Size(61, 16);
-            this.EmailLabel.TabIndex = 11;
-            this.EmailLabel.Text = "Surname";
+            this.button1.Location = new System.Drawing.Point(117, 357);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "Sign up";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -166,37 +129,86 @@
             this.label2.TabIndex = 12;
             this.label2.Text = "Email";
             // 
-            // button1
+            // EmailLabel
             // 
-            this.button1.Location = new System.Drawing.Point(117, 357);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Sign up";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.EmailLabel.AutoSize = true;
+            this.EmailLabel.Location = new System.Drawing.Point(33, 220);
+            this.EmailLabel.Name = "EmailLabel";
+            this.EmailLabel.Size = new System.Drawing.Size(61, 16);
+            this.EmailLabel.TabIndex = 11;
+            this.EmailLabel.Text = "Surname";
             // 
-            // label3
+            // UsernameLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 11);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 16);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "SSN";
+            this.UsernameLabel.AutoSize = true;
+            this.UsernameLabel.Location = new System.Drawing.Point(15, 49);
+            this.UsernameLabel.Name = "UsernameLabel";
+            this.UsernameLabel.Size = new System.Drawing.Size(70, 16);
+            this.UsernameLabel.TabIndex = 2;
+            this.UsernameLabel.Text = "Username";
             // 
-            // NewSSN
+            // NewSurname
             // 
-            this.NewSSN.Location = new System.Drawing.Point(105, 11);
-            this.NewSSN.Name = "NewSSN";
-            this.NewSSN.Size = new System.Drawing.Size(155, 22);
-            this.NewSSN.TabIndex = 17;
+            this.NewSurname.Location = new System.Drawing.Point(105, 217);
+            this.NewSurname.Name = "NewSurname";
+            this.NewSurname.Size = new System.Drawing.Size(155, 22);
+            this.NewSurname.TabIndex = 10;
+            // 
+            // NewUsername
+            // 
+            this.NewUsername.Location = new System.Drawing.Point(105, 49);
+            this.NewUsername.Name = "NewUsername";
+            this.NewUsername.Size = new System.Drawing.Size(155, 22);
+            this.NewUsername.TabIndex = 0;
+            // 
+            // NewName
+            // 
+            this.NewName.Location = new System.Drawing.Point(105, 159);
+            this.NewName.Name = "NewName";
+            this.NewName.Size = new System.Drawing.Size(155, 22);
+            this.NewName.TabIndex = 9;
+            // 
+            // NewPassword
+            // 
+            this.NewPassword.Location = new System.Drawing.Point(105, 97);
+            this.NewPassword.Name = "NewPassword";
+            this.NewPassword.Size = new System.Drawing.Size(155, 22);
+            this.NewPassword.TabIndex = 7;
+            // 
+            // SSNLabel
+            // 
+            this.SSNLabel.AutoSize = true;
+            this.SSNLabel.Location = new System.Drawing.Point(33, 162);
+            this.SSNLabel.Name = "SSNLabel";
+            this.SSNLabel.Size = new System.Drawing.Size(44, 16);
+            this.SSNLabel.TabIndex = 8;
+            this.SSNLabel.Text = "Name";
+            // 
+            // PasswordLabel
+            // 
+            this.PasswordLabel.AutoSize = true;
+            this.PasswordLabel.Location = new System.Drawing.Point(18, 97);
+            this.PasswordLabel.Name = "PasswordLabel";
+            this.PasswordLabel.Size = new System.Drawing.Size(67, 16);
+            this.PasswordLabel.TabIndex = 6;
+            this.PasswordLabel.Text = "Password";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(12, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(30, 23);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "<";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // SignUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.UsernameBox);
             this.Name = "SignUpForm";
             this.Text = "SignUpForm";
@@ -224,5 +236,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox NewSSN;
+        private System.Windows.Forms.Button button2;
     }
 }

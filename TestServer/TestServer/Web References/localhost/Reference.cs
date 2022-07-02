@@ -45,6 +45,12 @@ namespace TestServer.localhost {
         
         private System.Threading.SendOrPostCallback AddToChattingOperationCompleted;
         
+        private System.Threading.SendOrPostCallback OldMessagesOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SelectEmployeeOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SelectEmployee2OperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -106,6 +112,15 @@ namespace TestServer.localhost {
         
         /// <remarks/>
         public event AddToChattingCompletedEventHandler AddToChattingCompleted;
+        
+        /// <remarks/>
+        public event OldMessagesCompletedEventHandler OldMessagesCompleted;
+        
+        /// <remarks/>
+        public event SelectEmployeeCompletedEventHandler SelectEmployeeCompleted;
+        
+        /// <remarks/>
+        public event SelectEmployee2CompletedEventHandler SelectEmployee2Completed;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AllEmployees", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -346,6 +361,99 @@ namespace TestServer.localhost {
             if ((this.AddToChattingCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.AddToChattingCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/OldMessages", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Chatting[] OldMessages(string From, string To, string RequestingUser) {
+            object[] results = this.Invoke("OldMessages", new object[] {
+                        From,
+                        To,
+                        RequestingUser});
+            return ((Chatting[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void OldMessagesAsync(string From, string To, string RequestingUser) {
+            this.OldMessagesAsync(From, To, RequestingUser, null);
+        }
+        
+        /// <remarks/>
+        public void OldMessagesAsync(string From, string To, string RequestingUser, object userState) {
+            if ((this.OldMessagesOperationCompleted == null)) {
+                this.OldMessagesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnOldMessagesOperationCompleted);
+            }
+            this.InvokeAsync("OldMessages", new object[] {
+                        From,
+                        To,
+                        RequestingUser}, this.OldMessagesOperationCompleted, userState);
+        }
+        
+        private void OnOldMessagesOperationCompleted(object arg) {
+            if ((this.OldMessagesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.OldMessagesCompleted(this, new OldMessagesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SelectEmployee", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Employee SelectEmployee(string username, string password) {
+            object[] results = this.Invoke("SelectEmployee", new object[] {
+                        username,
+                        password});
+            return ((Employee)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SelectEmployeeAsync(string username, string password) {
+            this.SelectEmployeeAsync(username, password, null);
+        }
+        
+        /// <remarks/>
+        public void SelectEmployeeAsync(string username, string password, object userState) {
+            if ((this.SelectEmployeeOperationCompleted == null)) {
+                this.SelectEmployeeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSelectEmployeeOperationCompleted);
+            }
+            this.InvokeAsync("SelectEmployee", new object[] {
+                        username,
+                        password}, this.SelectEmployeeOperationCompleted, userState);
+        }
+        
+        private void OnSelectEmployeeOperationCompleted(object arg) {
+            if ((this.SelectEmployeeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SelectEmployeeCompleted(this, new SelectEmployeeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SelectEmployee2", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Employee SelectEmployee2(int empSSN) {
+            object[] results = this.Invoke("SelectEmployee2", new object[] {
+                        empSSN});
+            return ((Employee)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SelectEmployee2Async(int empSSN) {
+            this.SelectEmployee2Async(empSSN, null);
+        }
+        
+        /// <remarks/>
+        public void SelectEmployee2Async(int empSSN, object userState) {
+            if ((this.SelectEmployee2OperationCompleted == null)) {
+                this.SelectEmployee2OperationCompleted = new System.Threading.SendOrPostCallback(this.OnSelectEmployee2OperationCompleted);
+            }
+            this.InvokeAsync("SelectEmployee2", new object[] {
+                        empSSN}, this.SelectEmployee2OperationCompleted, userState);
+        }
+        
+        private void OnSelectEmployee2OperationCompleted(object arg) {
+            if ((this.SelectEmployee2Completed != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SelectEmployee2Completed(this, new SelectEmployee2CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -763,6 +871,84 @@ namespace TestServer.localhost {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void AddToChattingCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void OldMessagesCompletedEventHandler(object sender, OldMessagesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class OldMessagesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal OldMessagesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Chatting[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Chatting[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void SelectEmployeeCompletedEventHandler(object sender, SelectEmployeeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SelectEmployeeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SelectEmployeeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Employee Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Employee)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void SelectEmployee2CompletedEventHandler(object sender, SelectEmployee2CompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SelectEmployee2CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SelectEmployee2CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Employee Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Employee)(this.results[0]));
+            }
+        }
+    }
 }
 
 #pragma warning restore 1591

@@ -7,24 +7,26 @@ using System.Net.Sockets;
 using System.Net;
 using TestServer.Util;
 using System.Data.Entity.Validation;
-using TestServer.Model;
+using TestServer.localhost;
 
 namespace TestServer
 {
 	using NetworkHandlerSocket = NetworkHandler.NetworkHandlerSocket;
     public class Program
 	{
-		public static Model1 db = new Model1();
 		public static NetworkHandler network;
 		public static NetworkHandlerSocket ns;
-		public static localhost.WebService1 ws = new localhost.WebService1();
+		public static WebService1 ws = new WebService1();
 		public static IDictionary<NetworkHandlerSocket, Employee> activeUsers = new Dictionary<NetworkHandlerSocket, Employee>();
 		
 		public static dynamic SignIn(NetworkHandlerSocket handler, dynamic data)
         {
 			string username = data.Username.ToString();
 			string password = data.Password.ToString();
-			var emp = db.Employees.FirstOrDefault(i => i.Username == username && i.Password == password);
+			
+			// var emp = db.Employees.FirstOrDefault(i => i.Username == username && i.Password == password);
+
+			var emp = ws.SelectEmployee(username, password);
 
 			if (emp != null)
 			{
@@ -46,9 +48,37 @@ namespace TestServer
 
 		public static dynamic SignUp(dynamic data)
 		{
-			ws.AddEmployee(int.Parse(data.SSN.ToString()), data.Name.ToString(), data.Surname.ToString(), data.Username.ToString(), data.Password.ToString(), data.Email.ToString(), data.Address.ToString());
+			int empSSN;
+			try
+            {
+				empSSN = int.Parse(data.SSN.ToString());
+            }
+			catch
+            {
+				return new { Type = "signup_error" };
+			}
 
-			return new { Type = "signup_success" };
+			//var emp = db.Employees.FirstOrDefault(i => i.SSN == empSSN);
+
+			var emp = ws.SelectEmployee2(empSSN);
+
+
+			string empname = data.Name.ToString();
+			string empsurname = data.Surname.ToString();
+			string empusername = data.Username.ToString();
+			string emppass = data.Password.ToString();
+			string empemail = data.Email.ToString();
+			string empaddress = data.Address.ToString();
+
+			if ( emp == null && !string.IsNullOrEmpty(empname) && !string.IsNullOrEmpty(empsurname) && !string.IsNullOrEmpty(empusername) && !string.IsNullOrEmpty(emppass) && !string.IsNullOrEmpty(empemail) && !string.IsNullOrEmpty(empaddress))
+            {
+				ws.AddEmployee(empSSN, empname, empsurname, empusername, emppass, empemail, empaddress);
+				return new { Type = "signup_success" };
+            }
+            else
+            {
+				return new { Type = "signup_error" };
+            }
 		}
 
 		public static dynamic Active()
@@ -67,9 +97,9 @@ namespace TestServer
 			string To = data.To.ToString();
 			string RequestingUser = data.requestingUser.ToString();
 
-			var oldmessages = db.Chattings.Where(i => ((i.SenderUsername == From && i.RecieverUsername == To) || (i.SenderUsername == To && i.RecieverUsername == From)) && i.ChattingType == "Private").Select(i => new { i.SenderUsername, i.Message, i.DateSent, i.Encrypted }).ToArray();
+			var oldmessages = ws.OldMessages(From, To, RequestingUser);
 
-			if (oldmessages != null)
+			if (! (oldmessages.Length == 0))
 			{
 				Console.WriteLine(NetworkHandler.Serialize(oldmessages));
 
@@ -91,14 +121,13 @@ namespace TestServer
 			string encrypted = data.Encrypt.ToString();
 
 
-			foreach (var activeSockets in activeUsers)
+			foreach (var active in activeUsers)
 			{
-				string reqUser = activeSockets.Value.Username.ToString();
+				string reqUser = active.Value.Username.ToString();
 
 				ws.AddToChatting(from, reqUser, datesent, BroadastMsg, "Broadcast", encrypted);
-				 
 				
-				activeSockets.Key.Send(new // send broadcasted message to active sockets
+				active.Key.Send(new // send broadcasted message to active sockets
 				{ 
 					Type = "BroadCast", 
 					BroadcastMessage = BroadastMsg, 
@@ -106,13 +135,13 @@ namespace TestServer
 					FromUser = from,
 					Encrypt = encrypted
 				});
-
 			}
 		}
 
 		public static void Message(dynamic data)
 		{
 			var to = activeUsers.FirstOrDefault(i => i.Value.Username == data.To.ToString());
+			
 			var response = new
 			{
 				Type = "private_message",
@@ -124,6 +153,7 @@ namespace TestServer
 			};
 
 			to.Key.Send(response);
+			
 			var datenow = DateTime.Now.ToString();
 
 			ws.AddToChatting(data.From.ToString(), data.To.ToString(), datenow, data.Message.ToString(), "Private", data.Encrypt.ToString());
@@ -166,9 +196,9 @@ namespace TestServer
 						PrivateOldMessage(data);
 
 					else if (data.Type == "BroadCast")
-						BroadCast(data);
-					
+						BroadCast(data);	
 				}
+
 				catch (Exception ex)
 				{
 					response = new { Type = "error", Message = ex.Message };
@@ -190,12 +220,17 @@ namespace TestServer
 
 				new Thread(() =>
 					{
-
 						Console.WriteLine("Client connected");
 						while (handler.Connected) SocketLoop(handler);
 						Console.WriteLine("Client disconnected");
 						
-						ws.AddToLogoutLogs(activeUsers[handler].Username);
+						// add to logoutlogs if the user was signed in
+						try
+                        {
+							ws.AddToLogoutLogs(activeUsers[handler].Username);
+                        }
+						// dont do anything if the user was not signed in
+						catch (KeyNotFoundException) {}
 						
 						activeUsers.Remove(handler);
 						

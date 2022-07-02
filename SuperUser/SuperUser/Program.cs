@@ -14,9 +14,9 @@ namespace SuperUser
             while (true)
             {
                 Console.WriteLine("Do you wish to view a table? (yes/no)");
-                var ShowOrAdd = Console.ReadLine();
+                var Show = Console.ReadLine();
 
-                switch (ShowOrAdd)
+                switch (Show)
                 {
                     case "yes":
                     Console.WriteLine("Enter the table you want to see: \n 1- Employee \n 2- LoginLog \n 3- LogoutLog \n 4- Chatting");

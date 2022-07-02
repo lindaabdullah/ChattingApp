@@ -24,7 +24,7 @@ namespace TestGUI.Forms
 
             Program.Receiver.Map("signup_error", (response) =>
             {
-                MessageBox.Show(this, "Missing Fields.", "Error", MessageBoxButtons.OK);
+                MessageBox.Show(this, "Missing Fields or employee already exists.", "Error", MessageBoxButtons.OK);
             });
 
             Program.Receiver.Network.Send(new
@@ -38,8 +38,13 @@ namespace TestGUI.Forms
                 Email = NewEmail.Text,
                 Address = NewAddress.Text
             });
-            
-            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Hide();
+            (new SignInForm()).ShowDialog();
+            Close();
         }
     }
 }

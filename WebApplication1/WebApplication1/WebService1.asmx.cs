@@ -20,7 +20,7 @@ namespace WebApplication1
     public class WebService1 : System.Web.Services.WebService
     {
         Model1 db = new Model1();
-        
+
         // methods to show tables
         //------------------------------------------------
         [WebMethod]
@@ -28,7 +28,7 @@ namespace WebApplication1
         {
             return db.Employees.ToList();
         }
-        
+
         [WebMethod]
         public List<LoginLog> AllLoginLogs()
         {
@@ -93,7 +93,7 @@ namespace WebApplication1
         [WebMethod]
         public void AddToChatting(string from, string to, string date, string msg, string type, string encrypted)
         {
-            db.Chattings.Add(new Chatting  // add broad casted message to table in database
+            db.Chattings.Add(new Chatting
             {
                 SenderUsername = from,
                 RecieverUsername = to,
@@ -104,7 +104,25 @@ namespace WebApplication1
             });
             db.SaveChanges();
         }
-        //------------------------------------------------
+
+        [WebMethod]
+        public Chatting[] OldMessages(string From, string To, string RequestingUser)
+        {
+            return db.Chattings.Where(i => ((i.SenderUsername == From && i.RecieverUsername == To) || (i.SenderUsername == To && i.RecieverUsername == From)) && i.ChattingType == "Private").ToArray();
+        }
+
+        [WebMethod]
+        public Employee SelectEmployee(string username, string password)
+        {
+            return db.Employees.FirstOrDefault(i => i.Username == username && i.Password == password); 
+        }
+
+        [WebMethod]
+        public Employee SelectEmployee2(int empSSN)
+        {
+            return db.Employees.FirstOrDefault(i => i.SSN == empSSN);
+        }
     }
+    //------------------------------------------------
 
 }

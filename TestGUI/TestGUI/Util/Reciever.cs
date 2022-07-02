@@ -31,7 +31,6 @@ namespace TestGUI.Util
                 }
                 catch (KeyNotFoundException ex)
                 {
-                    // TODO: error handling
                     throw ex;
                 }
             }
